@@ -1,0 +1,41 @@
+name: 定时发送邮件
+
+on:
+  #push:
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
+  # 定时任务触发 北京时间21:30 执行 21-9=12
+  schedule:
+    - cron: '30 4 * * *'
+  watch:
+    types: started
+  # 手动触发
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v3 # github marketplace 中提供的方案，@v3代表版本
+
+      - name: 设置执行环境的时区
+        uses: szenius/set-timezone@v1.0 # 设置执行环境的时区
+        with:
+          timezoneLinux: "Asia/Shanghai"
+
+      - name: 初始化Python
+        uses: actions/setup-python@v3 # github marketplace 中提供的方案，@v3代表版本
+        with:
+          python-version: 3.8 # 设置Python版本
+          cache: 'poetry' # 设置缓存
+
+      - name: 开始
+        run: |
+          pip3 install requests
+          user='${{ secrets.USER }}'
+          passwd='${{ secrets.PWD }}' 
+          open_get_weather='${{ secrets.OPEN_GET_WEATHER }}'
+          area='${{ secrets.AREA }}'
+          python3 main.py ${user} ${passwd} ${open_get_weather} ${area}
