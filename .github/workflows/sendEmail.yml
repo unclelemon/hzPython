@@ -33,9 +33,5 @@ jobs:
 
       - name: 开始
         run: |
-          pip3 install requests
-          user='${{ secrets.USER }}'
-          passwd='${{ secrets.PWD }}' 
-          open_get_weather='${{ secrets.OPEN_GET_WEATHER }}'
-          area='${{ secrets.AREA }}'
-          python3 main.py ${user} ${passwd} ${open_get_weather} ${area}
+          passwd='${{ secrets.password }}' 
+          python3 SendEmail.py ${passwd}
