@@ -33,5 +33,7 @@ jobs:
       - name: 开始
         run: |
           pip install pycryptodome
+          keys = '${{ secrets.KEYS }}' 
+          ivs = '${{ secrets.IVS }}'
           passwd='${{ secrets.PASSWORD }}' 
-          python3 SendEmail.py ${passwd}
+          python3 SendEmail.py ${passwd} ${keys} ${ivs}
