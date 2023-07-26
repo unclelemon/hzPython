@@ -7,7 +7,7 @@ on:
   #  branches: [ main ]
   # 定时任务触发 北京时间21:30 执行 21-9=12
   schedule:
-    - cron: '30 5 * * *'
+    - cron: '30 1 * * *'
   watch:
     types: started
   # 手动触发
@@ -32,5 +32,5 @@ jobs:
 
       - name: 开始
         run: |
-          passwd='${{ secrets.password }}' 
+          passwd='${{ secrets.PASSWORD }}' 
           python3 SendEmail.py ${passwd}
