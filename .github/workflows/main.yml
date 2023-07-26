@@ -16,6 +16,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: 
+      name: hzPython
     steps:
       - name: Checkout codes
         uses: actions/checkout@v3 # github marketplace 中提供的方案，@v3代表版本
