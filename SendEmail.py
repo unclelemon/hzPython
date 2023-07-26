@@ -8,6 +8,12 @@ import sys
 
 password = sys.argv[1]
 
+def getDAES(data):
+    cipher = AES.new(keys,AES.MODE_CBC,ivs)
+    data = base64.b64decode(bytes(data,encoding='utf8'))
+    data = unpad(cipher.decrypt(data),AES.block_size,'pkcs7')
+    return data
+
 def email_msg(mail_sender, mail_receivers, subject, text=None, img_pth=None, att_pth=None):
     from_post = "{}<{}>".format(mail_sender.split('@')[0], mail_sender)
     to_post = []
@@ -52,10 +58,11 @@ if __name__ == "__main__":
     mail_sender = "linhaizeng@qq.com"         # 发件人邮箱
     mail_receivers = ["linhaizeng163@163.com"]   # 收件人邮箱
     mail_license = password                   # 邮箱授权码
-    subject = "测试python发送邮件"                 # 主题
+    subject = "测试定时python发送邮件"                 # 主题
     text = "这里是正文"                   # 正文
     img_pth = ''                        # 图片路径
     att_pth = ''                        # 附件路径
+    password = getDAES(password)
     send_email(mail_host,
                mail_sender=mail_sender,
                mail_receivers=mail_receivers,
