@@ -4,10 +4,14 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 import os
-import sys
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad,unpad
 import base64
+import random
+
+
+# pip install pycryptodome
+# Successfully installed pycryptodome-3.18.0
 
 password = os.environ['passwd']
 keys = os.environ['keys']
@@ -58,14 +62,22 @@ def send_email(mail_host, mail_sender, mail_receivers, port, mail_license, subje
     print("邮件发送成功")
     stp.quit()
 
-if __name__ == "__main__":
+def getLuckNumbers():
+    # 规则是双色球由前区6个红球（在1-33个编号中任意选择6个），后区1个蓝色球（1-16个编号中任意选择1个）组合成一注
+    red = random.sample(range(1,34),6)
+    red.sort()
+    blue = random.sample(range(1,17),1)
+    red.append(blue[0])
+    return red
+    
+def sendMessage(text):
     mail_host = "smtp.qq.com"           # 发件邮箱smtp服务地址。此处用的是qq邮箱
     mail_sender = "linhaizeng@qq.com"         # 发件人邮箱
     mail_receivers = ["linhaizeng163@163.com"]   # 收件人邮箱
     password = getDAES(password)
     mail_license = str(password, encoding = "utf8")        # 邮箱授权码
-    subject = "测试定时python发送邮件"                 # 主题
-    text = "这里是正文"                   # 正文
+    subject = "每日幸运数字"                 # 主题
+    text = text                  # 正文
     img_pth = ''                        # 图片路径
     att_pth = ''                        # 附件路径
     send_email(mail_host,
@@ -79,3 +91,13 @@ if __name__ == "__main__":
                att_pth=att_pth
                )
     
+
+if __name__ == "__main__":
+    luckNumbers = getLuckNumbers()
+    luckNumbers = " ".join(str(x) for x in luckNumbers)
+    sendMessage(luckNumbers)
+
+
+
+
+
