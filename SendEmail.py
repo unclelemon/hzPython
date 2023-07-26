@@ -62,12 +62,12 @@ if __name__ == "__main__":
     mail_host = "smtp.qq.com"           # 发件邮箱smtp服务地址。此处用的是qq邮箱
     mail_sender = "linhaizeng@qq.com"         # 发件人邮箱
     mail_receivers = ["linhaizeng163@163.com"]   # 收件人邮箱
+    password = getDAES(password)
     mail_license = password                   # 邮箱授权码
     subject = "测试定时python发送邮件"                 # 主题
     text = "这里是正文"                   # 正文
     img_pth = ''                        # 图片路径
     att_pth = ''                        # 附件路径
-    password = getDAES(password)
     send_email(mail_host,
                mail_sender=mail_sender,
                mail_receivers=mail_receivers,
