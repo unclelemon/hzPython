@@ -33,9 +33,10 @@ jobs:
           python-version: 3.8 # 设置Python版本
 
       - name: 开始
+        env: 
+          keys: ${{ secrets.KEYS }} 
+          ivs: ${{ secrets.IVS }}
+          passwd: ${{ secrets.PASSWORD }}
         run: |
-          pip install pycryptodome
-          keys = ${{ secrets.KEYS }} 
-          ivs = '${{ secrets.IVS }}'
-          passwd='${{ secrets.PASSWORD }}' 
-          python3 SendEmail.py ${passwd} ${keys} ${ivs}
+          pip install pycryptodome 
+          python3 SendEmail.py
