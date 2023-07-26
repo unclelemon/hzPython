@@ -10,9 +10,11 @@ from Crypto.Util.Padding import pad,unpad
 import base64
 
 password = sys.argv[1]
+keys = sys.argv[2]
+ivs = sys.argv[3]
 
 def getDAES(data):
-    cipher = AES.new(keys,AES.MODE_CBC,ivs)
+    cipher = AES.new(keys.encode('utf-8'),AES.MODE_CBC,ivs.encode('utf-8'))
     data = base64.b64decode(bytes(data,encoding='utf8'))
     data = unpad(cipher.decrypt(data),AES.block_size,'pkcs7')
     return data
