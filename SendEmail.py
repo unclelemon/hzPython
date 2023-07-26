@@ -9,9 +9,9 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad,unpad
 import base64
 
-password = sys.argv[1]
-keys = sys.argv[2]
-ivs = sys.argv[3]
+password = os.environ['passwd']
+keys = os.environ['keys']
+ivs = os.environ['ivs']
 
 def getDAES(data):
     cipher = AES.new(keys.encode('utf-8'),AES.MODE_CBC,ivs.encode('utf-8'))
