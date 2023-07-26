@@ -5,6 +5,9 @@ from email.mime.multipart import MIMEMultipart
 from email.header import Header
 import os
 import sys
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad,unpad
+import base64
 
 password = sys.argv[1]
 
