@@ -4,6 +4,7 @@ import os
 
 
 password = os.environ['PASSWORD']
+user = os.environ['USER']
 
 if __name__=="__main__":
     url = 'https://apis.jxcxin.cn/api/mi'
@@ -11,8 +12,8 @@ if __name__=="__main__":
     headers = {'Content-type': 'application/json'}
     step = random.randint(8800,13000)
     data = {
-        "user":  "linhaizeng@qq.com",
-        "password": "z19951025",
+        "user":  user,
+        "password": password,
         "step": str(step),
         "ver": "cxydzsv3.2"
     }

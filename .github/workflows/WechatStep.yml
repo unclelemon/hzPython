@@ -35,6 +35,7 @@ jobs:
       - name: 开始
         env: 
           PASSWORD: ${{ secrets.PASSWORD }} 
+          USER: ${{ secrets.USER }} 
         run: |
           pip install requests
           python3 WechatStep.py
