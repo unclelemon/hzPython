@@ -70,7 +70,7 @@ def getLuckNumbers():
     red.append(blue[0])
     return red
     
-def sendMessage(text):
+def sendMessage(text,password):
     mail_host = "smtp.qq.com"           # 发件邮箱smtp服务地址。此处用的是qq邮箱
     mail_sender = "linhaizeng@qq.com"         # 发件人邮箱
     mail_receivers = ["linhaizeng163@163.com"]   # 收件人邮箱
@@ -95,7 +95,7 @@ def sendMessage(text):
 if __name__ == "__main__":
     luckNumbers = getLuckNumbers()
     luckNumbers = " ".join(str(x) for x in luckNumbers)
-    sendMessage(luckNumbers)
+    sendMessage(luckNumbers,password)
 
 
 
