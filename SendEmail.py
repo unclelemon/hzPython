@@ -8,7 +8,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad,unpad
 import base64
 import random
-
+from datetime import datetime
 
 # pip install pycryptodome
 # Successfully installed pycryptodome-3.18.0
@@ -16,6 +16,10 @@ import random
 password = os.environ['passwd']
 keys = os.environ['keys']
 ivs = os.environ['ivs']
+
+twoColor = [1,3,6]
+superLotto = [0,2,5]
+dict = ['一','二','三','四','五','六','七']
 
 def getDAES(data):
     cipher = AES.new(keys.encode('utf-8'),AES.MODE_CBC,ivs.encode('utf-8'))
@@ -62,13 +66,23 @@ def send_email(mail_host, mail_sender, mail_receivers, port, mail_license, subje
     print("邮件发送成功")
     stp.quit()
 
-def getLuckNumbers():
+def getTwoColorLuckNumbers():
     # 规则是双色球由前区6个红球（在1-33个编号中任意选择6个），后区1个蓝色球（1-16个编号中任意选择1个）组合成一注
     red = random.sample(range(1,34),6)
     red.sort()
     blue = random.sample(range(1,17),1)
     red.append(blue[0])
     return red
+
+def getSuperLottoNumbers():
+    # 玩家需要选出5个红球号码和2个蓝球号码来进行投注。红球号码由1-35的数字组成，蓝球号码由1-12的数字组成
+    first = random.sample(range(1,36),5)
+    first.sort()
+    second = random.sample(range(1,13),2).sort
+    first.append(second[0])
+    first.append(second[1])
+    return first
+
     
 def sendMessage(text,password):
     mail_host = "smtp.qq.com"           # 发件邮箱smtp服务地址。此处用的是qq邮箱
@@ -90,12 +104,25 @@ def sendMessage(text,password):
                img_pth=img_pth,
                att_pth=att_pth
                )
-    
+
+def judgeDay() -> int:
+    weekday = datetime.today().weekday()
+    return weekday
+
 
 if __name__ == "__main__":
-    luckNumbers = getLuckNumbers()
-    luckNumbers = " ".join(str(x) for x in luckNumbers)
-    sendMessage(luckNumbers,password)
+    weekday = judgeDay()
+    luckNumbers = []
+    message = ''
+    if twoColor.count(weekday) > 0:
+        luckNumbers = getTwoColorLuckNumbers()
+        message ="双色球\n星期%s,日期：%s \n号码：%s"%(dict[weekday],datetime.today()," ".join(str(x) for x in luckNumbers))
+    elif superLotto.count(weekday) > 0:
+        luckNumbers = getSuperLottoNumbers()
+        message = "大乐透\n星期%s,日期：%s \n号码：%s"%(dict[weekday]," ".join(str(x) for x in luckNumbers))
+    else:
+        message = '大乐透：1，3,6 双色球 2 4 7 今天周五 无活动'
+    sendMessage(message,password)
 
 
 
