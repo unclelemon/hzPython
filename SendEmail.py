@@ -78,7 +78,8 @@ def getSuperLottoNumbers():
     # 玩家需要选出5个红球号码和2个蓝球号码来进行投注。红球号码由1-35的数字组成，蓝球号码由1-12的数字组成
     first = random.sample(range(1,36),5)
     first.sort()
-    second = random.sample(range(1,13),2).sort
+    second = random.sample(range(1,13),2)
+    second.sort()
     first.append(second[0])
     first.append(second[1])
     return first
@@ -119,7 +120,7 @@ if __name__ == "__main__":
         message ="双色球\n星期%s,日期：%s \n号码：%s"%(dict[weekday],datetime.today()," ".join(str(x) for x in luckNumbers))
     elif superLotto.count(weekday) > 0:
         luckNumbers = getSuperLottoNumbers()
-        message = "大乐透\n星期%s,日期：%s \n号码：%s"%(dict[weekday]," ".join(str(x) for x in luckNumbers))
+        message = "大乐透\n星期%s,日期：%s \n号码：%s"%(dict[weekday],datetime.today()," ".join(str(x) for x in luckNumbers))
     else:
         message = '大乐透：1，3,6 双色球 2 4 7 今天周五 无活动'
     sendMessage(message,password)
