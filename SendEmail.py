@@ -88,7 +88,7 @@ def getSuperLottoNumbers():
 def sendMessage(text,password):
     mail_host = "smtp.qq.com"           # 发件邮箱smtp服务地址。此处用的是qq邮箱
     mail_sender = "linhaizeng@qq.com"         # 发件人邮箱
-    mail_receivers = ["linhaizeng163@163.com"]   # 收件人邮箱
+    mail_receivers = ["linhaizeng163@163.com","gloraint@163.com"]   # 收件人邮箱
     password = getDAES(password)
     mail_license = str(password, encoding = "utf8")        # 邮箱授权码
     subject = "每日幸运数字"                 # 主题
