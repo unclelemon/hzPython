@@ -85,10 +85,10 @@ def getSuperLottoNumbers():
     return first
 
     
-def sendMessage(text,password):
+def sendMessage(text,password,email):
     mail_host = "smtp.qq.com"           # 发件邮箱smtp服务地址。此处用的是qq邮箱
     mail_sender = "linhaizeng@qq.com"         # 发件人邮箱
-    mail_receivers = ["linhaizeng163@163.com","gloraint@163.com"]   # 收件人邮箱
+    mail_receivers = email   # 收件人邮箱
     password = getDAES(password)
     mail_license = str(password, encoding = "utf8")        # 邮箱授权码
     subject = "每日幸运数字"                 # 主题
@@ -111,7 +111,7 @@ def judgeDay() -> int:
     return weekday
 
 
-if __name__ == "__main__":
+def sendMessageByEmail(email):
     weekday = judgeDay()
     luckNumbers = []
     message = ''
@@ -123,7 +123,16 @@ if __name__ == "__main__":
         message = "大乐透\n星期%s,日期：%s \n号码：%s"%(dict[weekday],datetime.today()," ".join(str(x) for x in luckNumbers))
     else:
         message = '大乐透：1，3,6 双色球 2 4 7 今天周五 无活动'
-    sendMessage(message,password)
+    sendMessage(message,password,email)
+
+
+
+if __name__ == "__main__":
+    sendMessageByEmail(["linhaizeng@qq.com"])
+    sendMessageByEmail(["gloraint@163.com"])
+
+
+
 
 
 
