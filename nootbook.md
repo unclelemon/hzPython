@@ -29,3 +29,7 @@ print(st)#学习Python很有趣
 参考博客：https://zhuanlan.zhihu.com/p/260192496
 Unicode字符集
 utf-8 表示字符编码
+
+# json
+json.load()：是从文件中加载内容并转换成json；
+json.loads()：是将字符串转换成json。
