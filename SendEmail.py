@@ -129,7 +129,7 @@ def sendMessageByEmail(email):
 
 if __name__ == "__main__":
     sendMessageByEmail(["linhaizeng@qq.com"])
-    # sendMessageByEmail(["gloraint@163.com"])
+    sendMessageByEmail(["gloraint@163.com"])
 
 
 
